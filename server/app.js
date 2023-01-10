@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 4001;
 
 /*
- * Middleware
+ * Middlewares
  */
 app.use(morgan("dev"));
 app.use(
@@ -24,7 +24,7 @@ app.use(
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
-await sequelize.sync();
+await sequelize.sync(); // sync sequelize
 
 /*
  * Routes
