@@ -24,7 +24,7 @@ app.use(
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
-await sequelize.sync(); // sync sequelize
+await sequelize.sync({force: true}); // sync sequelize
 
 /*
  * Routes

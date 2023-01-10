@@ -23,6 +23,7 @@ export const findById = async (id) => {
   const found = await User.findOne({ where: { id: id } });
   return found;
 };
+
 export const findByUsername = async (username) => {
   const found = await User.findOne({ where: { username: username } });
   return found;
