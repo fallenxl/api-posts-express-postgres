@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/database.js";
 import bcrypt from "bcrypt";
+import { Post } from "./Post.js";
 
 export const User = sequelize.define("user", {
   id: {
@@ -13,12 +14,29 @@ export const User = sequelize.define("user", {
     allowNull: false,
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
+  created_at: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  }
+},
+{
+  timestamps:false
 });
 
+/*
+ * References
+ */
 
+User.hasMany(Post, {foreignKey: "user_id", sourceKey: "id"});
+Post.belongsTo(User, {foreignKey: "user_id", targetKey: "id"});
+
+
+/*
+ * Functions
+ */
 export const findById = async (id) => {
   const found = await User.findOne({ where: { id: id } });
   return found;
