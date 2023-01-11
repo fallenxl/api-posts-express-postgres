@@ -1,8 +1,6 @@
-/*
- * Functions
- */
 import bcrypt from 'bcrypt';
 import { User } from '../models/User.js';
+
 export const findById = async (id) => {
     const found = await User.findOne({ where: { id: id } });
     return found;

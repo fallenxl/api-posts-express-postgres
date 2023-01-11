@@ -1,9 +1,11 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { User } from "../models/User.js";
 import {
   comparePassword,
   findById,
   findByUsername,
+  hashedPassword
 } from "../helpers/helper.js";
 
 passport.use(
@@ -32,6 +34,32 @@ passport.use(
   )
 );
 
+passport.use(
+  "local-register",
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password",
+    },
+    async (username, password, done) => {
+      try {
+        const user = await findByUsername(username);
+        if (user) {
+          return done(null, false);
+        }
+        const newUser = await User.create({
+          avatar_url: `https://api.dicebear.com/5.x/avataaars-neutral/svg?seed=${username}`,
+          username,
+          password: hashedPassword(password),
+        });
+        done(null, newUser);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -46,8 +74,8 @@ passport.deserializeUser(async (id, done) => {
 });
 
 export const isAuthenticated = (req, res, next) => {
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     return next();
   }
-  return res.status(401).json({msg: "Unauthorized"});
+  return res.status(401).json({ msg: "Unauthorized" });
 };

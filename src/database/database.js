@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
-
-const sequelize = new Sequelize("postgresql://postgres:02PjGBqUyptaU8WIunKu@containers-us-west-140.railway.app:5513/railway", {
-  dialect: "postgres"
+import { config } from "dotenv";
+config();
+const sequelize = new Sequelize(process.env.DB_URL, {
+  dialect: "postgres",
 });
 
 export default sequelize;

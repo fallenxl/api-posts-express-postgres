@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { signUp, signIn } from "../controllers/auth.controller.js";
+import { register, login } from "../controllers/auth.controller.js";
 import { isAuthenticated } from "../config/passport.js";
 import passport from "passport";
 const router = Router();
 
-router.post("/register", signUp);
+router.post("/register", passport.authenticate("local-register") ,register);
 
 router.post(
   "/login",
   passport.authenticate("local-signin"),
-  signIn
+  login
 );
 
 router.get(
