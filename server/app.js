@@ -14,10 +14,9 @@ const PORT = process.env.PORT || 4001;
  * Middlewares
  */
 app.use(morgan("dev"));
-app.use(cors());
 app.use(
   session({
-    secret: "FallencitoDev",
+    secret: "FallenDev",
     cookie: { maxAge: 36800000 },
     resave: false,
     saveUninitialized: false,
@@ -26,7 +25,7 @@ app.use(
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
-await sequelize.sync({ force: true });
+await sequelize.sync();
 
 /*
  * Routes

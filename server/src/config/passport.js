@@ -4,7 +4,7 @@ import {
   comparePassword,
   findById,
   findByUsername,
-} from "../models/User.js";
+} from "../helpers/helper.js";
 
 passport.use(
   "local-signin",

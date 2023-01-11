@@ -1,4 +1,5 @@
-import { User, hashedPassword, findByUsername } from "../models/User.js";
+import { User} from "../models/User.js";
+import { findByUsername, hashedPassword } from "../helpers/helper.js";
 
 
 export const signUp = async (req, res) => {
@@ -10,6 +11,7 @@ export const signUp = async (req, res) => {
     }
 
     const newUser = await User.create({
+      avatar_url: `https://api.dicebear.com/5.x/avataaars-neutral/svg?seed=${username}`,
       username,
       password: hashedPassword(password),
     });
