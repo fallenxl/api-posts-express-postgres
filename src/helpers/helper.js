@@ -20,3 +20,7 @@ export const findById = async (id) => {
     return bcrypt.compareSync(password, hash);
   };
   
+  export const validateParamsId = (param) => {
+    const regex = /^[0-9]+$/;
+    return regex.test(param);
+  }

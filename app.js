@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4001;
  * Middlewares
  */
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors({origin: "http://localhost:3000"}));
 app.use(
   session({
     secret: "FallenDev",
