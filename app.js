@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import session from "express-session";
+import cors from "cors"
 import morgan from "morgan";
 import indexRouter from "./src/routes/index.routes.js";
 import sequelize from "./src/database/database.js";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 4001;
  * Middlewares
  */
 app.use(morgan("dev"));
+app.use(cors());
 app.use(
   session({
     secret: "FallenDev",
