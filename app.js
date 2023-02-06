@@ -39,5 +39,5 @@ app.use(indexRouter);
  * Listener
  */
 app.listen(PORT, () => {
-  console.log(`Server listen on http://localhost:${PORT}`);
+  
 });
